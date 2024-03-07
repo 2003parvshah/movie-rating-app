@@ -27,14 +27,19 @@ export default function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
+        {/* home link */}
             <li>
               <Link to="/" className="nav-link">
                 Home
               </Link>
             </li>
+
+
             <li>
+              {/* if user login then whatchlist button show  */}
               {token != null ? (
                 <Link to="/watchlist" className="nav-link">
                   My WatchList
@@ -43,12 +48,16 @@ export default function Navbar() {
                 <></>
               )}
             </li>
+
+
+
             <li>
               {token == null ? (
                 <Link to="/login" className="btn nav-btn mx-lg-2">
                   Login
                 </Link>
               ) : (
+                // if user already login
                 <div className="dropdown">
                   <button
                     className="btn nav-btn dropdown-toggle"
@@ -57,13 +66,15 @@ export default function Navbar() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Welcome {displayName}
+                    Welcome {displayName} 
                   </button>
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuButton1"
                   >
                     <li>
+
+                      {/* change password link */}
                       <a
                         className="dropdown-item"
                         href="#"
@@ -74,6 +85,8 @@ export default function Navbar() {
                       </a>
                     </li>
                     <li>
+
+                      {/* logout link */}
                       <a
                         className="dropdown-item"
                         onClick={() => {
@@ -81,7 +94,7 @@ export default function Navbar() {
                           window.localStorage.removeItem("displayName");
                           navigate(`/login`);
                         }}
-                        href="#"
+                        // href="#"
                       >
                         Logout
                       </a>
@@ -91,6 +104,8 @@ export default function Navbar() {
               )}
             </li>
           </ul>
+
+          {/* change password dialog box  */}
           <div
             className="modal fade"
             id="passwordChangeModal"
@@ -104,6 +119,7 @@ export default function Navbar() {
                   <h5 className="modal-title" id="passwordChangeModalLabel">
                     Change Your Password
                   </h5>
+                  {/* cross button */}
                   <button
                     type="button"
                     className="btn-close"
@@ -120,6 +136,7 @@ export default function Navbar() {
                   />
                 </div>
                 <div className="modal-footer">
+                  {/* close button */}
                   <button
                     type="button"
                     className="btn btn-secondary"
@@ -127,6 +144,8 @@ export default function Navbar() {
                   >
                     Close
                   </button>
+
+                  {/* change password  conformation button with api */}
                   <button
                     type="button"
                     className="btn btn-success"

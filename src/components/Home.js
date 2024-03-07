@@ -7,16 +7,16 @@ export default function Home() {
   const [searchedmovie, searchForMovie] = useState(["bleach"]);
   const [movies, setMovies] = useState([]);
   const performMovieSearch = () => {
-    fetch(`${server}/movie/${searchedmovie}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "error") {
-          window.localStorage.setItem("recentsearch", "movienotfound");
-        } else {
-          setMovies(data);
-          window.localStorage.setItem("recentsearch", "moviesearched");
-        }
-      });
+    // fetch(`${server}/movie/${searchedmovie}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.status === "error") {
+    //       window.localStorage.setItem("recentsearch", "movienotfound");
+    //     } else {
+    //       setMovies(data);
+    //       window.localStorage.setItem("recentsearch", "moviesearched");
+    //     }
+    //   });
   };
 
   useEffect(() => {
@@ -65,15 +65,12 @@ export default function Home() {
                       movies.length > 0 &&
                       movies.map((movie) => {
                         let rating = (
-                          parseInt(movie.avg_rating) /
-                          parseInt(movie.rating_counts)
+                          parseFloat(movie.avg_rating)
                         )
-                          .toString()
-                          .substring(0, 3);
                         return (
                           <Card
-                            key={movie._id}
-                            id={movie._id}
+                            key={movie.id}
+                            id={movie.id}
                             movieName={movie.movie_name}
                             rating={rating === "NaN" ? 0 : rating}
                             img={movie.poster_image}
@@ -102,8 +99,8 @@ export default function Home() {
                           .substring(0, 3);
                         return (
                           <Card
-                            key={movie._id}
-                            id={movie._id}
+                            key={movie.id}
+                            id={movie.id}
                             movieName={movie.movie_name}
                             rating={rating === "NaN" ? 0 : rating}
                             img={movie.poster_image}
@@ -132,8 +129,8 @@ export default function Home() {
                         .substring(0, 3);
                       return (
                         <Card
-                          key={movie._id}
-                          id={movie._id}
+                          key={movie.id}
+                          id={movie.id}
                           movieName={movie.movie_name}
                           rating={rating === "NaN" ? 0 : rating}
                           img={movie.poster_image}

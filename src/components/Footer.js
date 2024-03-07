@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="container">
       <footer className="py-3 my-4">
-        <ul className="nav justify-content-center border-bottom pb-3 mb-3"></ul>
+        <ul className="nav justify-content-center border-bottom pb-3 mb-3"></ul>  
         <div className="d-flex flex-column flex-md-row justify-content-between">
           <p className="text-center text-muted">
             Movie Rating &copy; {new Date().getFullYear()}
