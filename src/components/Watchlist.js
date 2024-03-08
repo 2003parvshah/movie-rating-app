@@ -7,29 +7,29 @@ const Watchlist = () => {
   const [watchlistmovies, setMoviesFromWatchList] = useState([]);
   let usertoken = window.localStorage.getItem("token");
   useEffect(() => {
-    fetch(`${server}/watchlist/${usertoken}`)
+    fetch(`${server}/user/${usertoken}`)
       .then((res) => res.json())
       .then((data) => {
         setMoviesFromWatchList(data);
+        console.log(data);
       });
+
+    // if (watchlistmovies.length > 0 && watchlistmovies) {
+    //   watchlistmovies.map((movie) => {
+    //     fetch(`${server}/movie/id/${movie.movieid}`)
+    //       .then((res) => res.json())
+    //       .then((data) => {
+    //         if (data.status === "error") {
+    //           window.localStorage.setItem("recentsearch", "movienotfound");
+    //         } else {
+    //           if (movies.includes(data[0]) === false) {
+    //             setMovies((pre) => [...pre, data[0]]);
+    //           }
+    //         }
+    //       });
+    //   });
+    // }
   }, []);
-  useEffect(() => {
-    if (watchlistmovies.length > 0 && watchlistmovies) {
-      watchlistmovies.map((movie) => {
-        fetch(`${server}/movie/id/${movie.movieid}`)
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.status === "error") {
-              window.localStorage.setItem("recentsearch", "movienotfound");
-            } else {
-              if (movies.includes(data[0]) === false) {
-                setMovies((pre) => [...pre, data[0]]);
-              }
-            }
-          });
-      });
-    }
-  }, [watchlistmovies]);
   return (
     <div>
       <div className="row top-rated">
@@ -38,8 +38,9 @@ const Watchlist = () => {
           <p className="text-muted">Keep A Track of all your Favorite Movies</p>
         </div>
         <div className="slider">
-          {movies && movies.length > 0 && Array.isArray(movies) ? (
-            movies.reverse().map((movie) => {
+          {/* {movies && movies.length > 0 && Array.isArray(movies) ? ( */}
+          {watchlistmovies ? (
+            watchlistmovies.reverse().map((movie) => {
               let rating = (
                 parseInt(movie.avg_rating) / parseInt(movie.rating_counts)
               )
@@ -47,8 +48,8 @@ const Watchlist = () => {
                 .substring(0, 3);
               return (
                 <Card
-                  key={movie._id}
-                  id={movie._id}
+                  key={movie.id}
+                  id={movie.id}
                   watchlist="true"
                   movieName={movie.movie_name}
                   rating={rating === "NaN" ? 0 : rating}

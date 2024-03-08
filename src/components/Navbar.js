@@ -90,8 +90,10 @@ export default function Navbar() {
                       <a
                         className="dropdown-item"
                         onClick={() => {
-                          window.localStorage.removeItem("token");
-                          window.localStorage.removeItem("displayName");
+                          // window.localStorage.removeItem("token");
+                          // window.localStorage.removeItem("displayName");
+                          window.localStorage.clear();
+
                           navigate(`/login`);
                         }}
                         // href="#"

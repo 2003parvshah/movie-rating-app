@@ -14,20 +14,13 @@ export default function MovieDetail() {
   const [review, setReview] = useState();
   const [userid , setuserid] = useState(window.localStorage.getItem("token"));
   // const displayName = window.localStorage.getItem("displayName");
-  // const userid = window.localStorage.getItem("displayName");
-
   // const embeddedSrc = useMemo(() => `https://www.youtube.com/embed/${movie?.trailer}`, [movie?.trailer]);
-
   let params = useParams();
   let usertoken = window.localStorage.getItem("token");
   useEffect(() => {
     fetchMovies();
     fetchReviews();
   } , [avg]);
-  // useEffect(() => {
-  //   fetchReviews();
-  // } , [avg]);
-//thai gau
   const fetchMovies = async () => {
     // console.log(params.id);
     fetch(`${server}/movies/${params.id}`)
@@ -38,7 +31,6 @@ export default function MovieDetail() {
         // console.log("details of given movie",data);
       });
   };  
-// thai gau
   const fetchReviews = async () => {
     // console.log(params.id);
     fetch(`${server}/reviews/${params.id}`)
@@ -49,8 +41,6 @@ export default function MovieDetail() {
         // console.log("reviews of given movie ",data);
       });
   };  
-
-//   /*thai gau*/
 const postReview = async () => {
     console.log("data for post review   idM " ,movie.idM , "id" , userid,"message:" , review,"rating:", rate);
       console.log("Data types: idM", typeof movie.idM, "id", typeof userid, "message:", typeof review, "rating:", typeof rate);
@@ -86,7 +76,6 @@ const postReview = async () => {
     console.error('Error during post review:', error);
   }
 };
-
   const updateRating = async (avg_rating, rating_counts) => {
     // e.preventDefault();
     try 
@@ -116,24 +105,16 @@ const postReview = async () => {
    console.error('Error during login:', error);
  }
   };
-
   const handleSubmit = (e) => {
     // console.log("you cliked post review button");
     e.preventDefault();
     setShowRateBox(false);
         postReview();
-
-      // if (movie.avg_rating === "0") {
-      //   updateRating(rate, "1");
-      // } else {
         let currCount = parseInt(movie.rating_counts) + 1;
         let currRate = (((parseFloat(movie.avg_rating)*parseInt(movie.rating_counts)) + parseInt(rate))/currCount);
         setavg(currRate);
         updateRating(currRate.toString(), currCount.toString());
-    // }
-    // window.location.reload(); 
   };
-
   const addWatchList = async (e) => {
     console.log("movie added to watch list") ;
       // e.preventDefault();
@@ -155,15 +136,14 @@ const postReview = async () => {
      }
      else
      {
-      console.log("error in update output");
+      console.log("error in watchList output");
      }
    }
     catch (error)
    {
-     console.error('Error during login:', error);
+     console.error('Error during add watchList:', error);
    }
     };
-
   if (movie) {
     return (
       <div className="container text-light">
